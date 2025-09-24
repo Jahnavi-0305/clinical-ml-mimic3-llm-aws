@@ -1,0 +1,135 @@
+# Getting Started with MIMIC-III Data Access
+
+## Overview
+This guide provides step-by-step instructions for accessing and setting up the MIMIC-III (Medical Information Mart for Intensive Care III) dataset for clinical machine learning projects.
+
+## Prerequisites
+- Research/Academic affiliation
+- Completion of required ethics training
+- PhysioNet account creation
+
+## Step 1: Complete Required Training
+1. **CITI Training**: Complete the "Data or Specimens Only Research" course
+   - Visit: https://www.citiprogram.org/
+   - Complete the required modules
+   - Download and save your completion certificate
+
+2. **HIPAA Training**: Complete HIPAA training if not already done
+   - Most institutions provide this training
+   - Alternative: Complete online HIPAA training course
+
+## Step 2: Create PhysioNet Account
+1. Visit https://physionet.org/
+2. Click "Register" to create a new account
+3. Provide accurate academic/institutional information
+4. Verify your email address
+
+## Step 3: Complete Credentialing Application
+1. Log into your PhysioNet account
+2. Navigate to the MIMIC-III dataset page:
+   - URL: https://physionet.org/content/mimiciii/1.4/
+3. Click "Request Access" or "Files" tab
+4. Complete the credentialing application:
+   - Upload CITI training certificate
+   - Provide research purpose statement
+   - Include supervisor contact information (if applicable)
+   - Sign the Data Use Agreement (DUA)
+
+## Step 4: Wait for Approval
+- Processing time: Typically 1-7 business days
+- You'll receive email notification upon approval
+- Check spam folder if you don't receive confirmation
+
+## Step 5: Download the Dataset
+Once approved, you can download MIMIC-III data:
+
+### Option 1: Web Download (Small files)
+1. Visit the MIMIC-III PhysioNet page
+2. Click on "Files" tab
+3. Download individual files as needed
+
+### Option 2: Command Line (Recommended for full dataset)
+```bash
+# Install wget or curl if not available
+# Download using PhysioNet credentials
+wget -r -N -c -np --user [username] --ask-password https://physionet.org/files/mimiciii/1.4/
+```
+
+### Option 3: AWS (Fastest option)
+```bash
+# MIMIC-III is available on AWS Open Data
+# Note: Still requires PhysioNet credentialing
+aws s3 sync s3://mimic-iii-physionet/ ./mimic-iii/ --no-sign-request
+```
+
+## Step 6: Data Setup
+1. Create a secure directory for MIMIC-III data
+2. Extract downloaded files if necessary
+3. Verify data integrity using provided checksums
+4. Set appropriate file permissions (readable by project only)
+
+## Important Security Notes
+- **Never share MIMIC-III data** - this violates the DUA
+- Store data on secure, access-controlled systems only
+- Do not upload data to public repositories or cloud services
+- Follow your institution's data handling policies
+- Delete data when research is complete or after DUA expiration
+
+## Data Structure Overview
+MIMIC-III contains multiple CSV files:
+
+### Core Tables
+- `ADMISSIONS.csv` - Hospital admissions
+- `PATIENTS.csv` - Patient demographics
+- `ICUSTAYS.csv` - ICU stay information
+- `TRANSFERS.csv` - Patient location transfers
+
+### Clinical Data
+- `CHARTEVENTS.csv` - Chart data (vital signs, etc.)
+- `LABEVENTS.csv` - Laboratory measurements
+- `PRESCRIPTIONS.csv` - Medication prescriptions
+- `PROCEDURES_ICD.csv` - Procedure codes
+- `DIAGNOSES_ICD.csv` - Diagnosis codes
+
+### Text Data
+- `NOTEEVENTS.csv` - Clinical notes and reports
+
+## Next Steps
+After successful data setup:
+1. Review the MIMIC-III documentation: https://mimic.mit.edu/docs/iii/
+2. Explore the data structure using provided tutorials
+3. Set up the benchmark pipelines using `../benchmarks/README.md`
+4. Begin your clinical ML project development
+
+## Troubleshooting
+
+### Common Issues
+1. **Access Denied**: Ensure credentialing is complete and approved
+2. **Download Errors**: Check internet connection and PhysioNet credentials
+3. **File Corruption**: Verify checksums and re-download if necessary
+4. **Permission Issues**: Ensure proper file/directory permissions
+
+### Support
+- PhysioNet Support: https://physionet.org/about/
+- MIMIC Documentation: https://mimic.mit.edu/help/
+- Community Forum: https://discourse.mimic.mit.edu/
+
+## Compliance Reminders
+- Always follow ethical guidelines for human subjects research
+- Comply with institutional IRB requirements
+- Maintain data security and confidentiality
+- Report any data breaches immediately
+- Cite MIMIC-III appropriately in publications
+
+## Citation
+When using MIMIC-III data, please cite:
+
+```
+Johnson, A., Pollard, T., & Mark, R. (2016). MIMIC-III Clinical Database (version 1.4). PhysioNet. https://doi.org/10.13026/C2XW26.
+
+Johnson, A. E. W., Pollard, T. J., Shen, L., Lehman, L. H., Feng, M., Ghassemi, M., Moody, B., Szolovits, P., Celi, L. A., & Mark, R. G. (2016). MIMIC-III, a freely accessible critical care database. Scientific Data, 3, 160035.
+```
+
+---
+
+**Important**: This file provides general guidance. Always follow your institution's specific requirements and the most current PhysioNet instructions.
